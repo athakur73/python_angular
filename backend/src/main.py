@@ -7,7 +7,10 @@
 from entities.exam import Exam,ExamSchema
 from entities.entity import Session, engine, Base
 from flask import Flask, jsonify, request
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
 from sqlalchemy.ext.serializer import loads, dumps
 
 # generate database schema
@@ -53,4 +56,4 @@ def add_exam():
     return jsonify(posted_exam.to_dict()), 201
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(host = '0.0.0.0',port = 5000,debug = True)

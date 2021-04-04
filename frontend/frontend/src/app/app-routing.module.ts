@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ExamsComponent } from './exams/exams.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', component: ExamsComponent },
   { path: 'exams', component: ExamsComponent },
   // { path: 'route', component: ExamsComponent },
 ];

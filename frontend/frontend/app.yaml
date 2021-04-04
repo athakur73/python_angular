@@ -1,0 +1,13 @@
+runtime: python27
+env_variables:
+  environment: "--prod"
+api_version: 1
+threadsafe: true
+
+handlers:
+    - url: /(.*\.(js|css|svg|png)(|\.map))$
+      static_files: dist/frontend/\1
+      upload: dist/frontend/(.*)(|\.map)
+    - url: /.*
+      static_files: dist/frontend/index.html
+      upload: dist/frontend/.*

@@ -278,3 +278,19 @@ class project(Base):
     #     Entity.__init__(self, created_by)
     #     self.title = title
     #     self.description = description
+def serialize_all(data_obj):
+    serialized = []
+    for data in data_obj:
+        data_dict = data.__dict__
+        #print(data_dict)
+    
+        data_dict_keys = list(data_dict.keys())
+        #print(data_dict_keys)
+        #print(type(data_dict_keys))
+
+        serial_dict ={}
+        for i in range(1,len(data_dict_keys)):
+            serial_dict[data_dict_keys[i]]=data_dict[data_dict_keys[i]]
+        serialized.append(serial_dict)
+    return serialized 
+    

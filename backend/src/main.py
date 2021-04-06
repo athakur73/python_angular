@@ -8,6 +8,7 @@
 #from entities.exam import Exam,ExamSchema
 from entities.database import employee,project
 from entities.database import Session, engine, Base
+from entities.database import serialize_all
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import time
@@ -43,7 +44,8 @@ Base.metadata.create_all(engine)
 def employees():
     session = Session()
     emp_objects = session.query(employee).all()
-    serialized_obj = [{"title":obj.title,"description":obj.description} for obj in emp_objects]
+    serialized_obj = serialize_all(emp_objects)
+    #serialized_obj = [{"title":obj.title,"description":obj.description} for obj in emp_objects]
     session.close()
     return (jsonify(serialized_obj))
 
@@ -51,7 +53,11 @@ def employees():
 def projects():
     session = Session()
     project_objects = session.query(project).all()
-    serialized_obj = [{"title":obj.title,"description":obj.description} for obj in project_objects]
+    serialized_obj = serialize_all(project_objects)
+    # serialized_obj = [{"project_id":obj.project_id,
+    #                     "project_title":obj.project_title,
+    #                     "project_start_date":obj.project_start_date,
+    #                     "project_status":obj.project_status} for obj in project_objects]
     session.close()
     return (jsonify(serialized_obj))
 
@@ -66,10 +72,10 @@ def addEmployee():
                         project_id= data["project_id"], 
                         dept= data["dept"], 
 
-                        emp_start_date= datetime.datetime(),
-                        emp_last_working_date=datetime.datetime(),
-                        emp_project_assigned_date=datetime.datetime(),
-                        emp_project_end_date=datetime.datetime(),
+                        emp_start_date= datetime.datetime.now(),
+                        emp_last_working_date=datetime.datetime.now(),
+                        emp_project_assigned_date=datetime.datetime.now(),
+                        emp_project_end_date=datetime.datetime.now(),
 
                         employment_status=data["employment_status"], 
                         manager_name=data["manager_name"], 

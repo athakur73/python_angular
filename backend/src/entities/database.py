@@ -14,16 +14,23 @@ engine = create_engine("mssql+pyodbc://localhost\SQLEXPRESS/master?driver=SQL Se
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
-
+class authUser(Base):
+    __tablename__ = 'authUser'
+    id = Column(Integer, primary_key=True)
+    emp_id = Column(String)
+    username = Column(String)
+    password = Column(String)
+    
 class employee(Base):
     __tablename__ = 'employee'
     id = Column(Integer, primary_key=True)
+    emp_id = Column(String)
     first_name = Column(String)
     last_name = Column(String)
     sur_name = Column(String)
-    initial = Column(String)
-    salutation = Column(String)
-    project_id = Column(String)
+    initial = Column(String) 
+    salutation = Column(String) #mr,ms, Miss, Mrs
+    project_code = Column(String)
     dept = Column(String)
 
     emp_start_date = Column(DateTime)
@@ -31,10 +38,14 @@ class employee(Base):
     emp_project_assigned_date = Column(DateTime)
     emp_project_end_date = Column(DateTime)
 
-    employment_status = Column(String)
-    manager_name = Column(String)
+    employment_status = Column(String) #in project, new joined, in notice, bench, relieved
+    manager_name = Column(String) 
     manager_dept = Column(String)
-
+    resource_status = Column(String)
+    delivery_type = Column(String)
+    additional_allocation =  Column(String)
+    skills =  Column(String)
+    roles =  Column(String)
     # def __init__(self, created_by):
     #     self.created_at = datetime.now()
     #     self.updated_at = datetime.now()
@@ -153,10 +164,16 @@ class employee(Base):
 class project(Base):
     __tablename__ = 'project'
     id = Column(Integer, primary_key=True)
-    project_id = Column(String)
-    project_title = Column(String)
+    client_name = Column(String)
+    project_code = Column(String)
+    project_name = Column(String)
     project_start_date = Column(DateTime)
     project_status = Column(String)
+    billing_type = Column(String)
+    segment = Column(String)
+    geography = Column(String)
+    solution_category = Column(String)
+    financial_year = Column(String)
 
     def to_dict(self, show=None, _hide=[], _path=None):
         """Return a dictionary representation of this model."""

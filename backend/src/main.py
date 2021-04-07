@@ -9,6 +9,8 @@
 from entities.database import employee,project
 from entities.database import Session, engine, Base
 from entities.database import serialize_all
+from entities.sample_data import create_sample_employee,create_sample_project
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import time
@@ -19,26 +21,8 @@ from sqlalchemy.ext.serializer import loads, dumps
 
 # generate database schema
 Base.metadata.create_all(engine)
-
-# start session
-# session = Session()
-
-# check for existing data
-# exams = session.query(Exam).all()
-# if len(exams) == 0:
-#     # create and persist mock exam
-#     python_exam = Exam("SQLAlchemy Exam", "Test your knowledge about SQLAlchemy.", "script")
-#     session.add(python_exam)
-#     session.commit()
-#     session.close()
-
-#     # reload exams
-#     exams = session.query(Exam).all()
-
-# show existing exams
-# print('### Exams:')
-# for exam in exams:
-#     print(f'({exam.id}) {exam.title} - {exam.description}')
+create_sample_employee()
+create_sample_project()
 
 @app.route('/employees')
 def employees():

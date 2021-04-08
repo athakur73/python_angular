@@ -4,7 +4,7 @@ import { ExamsComponent } from './exams/exams.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'exams', component: ExamsComponent },
+ // { path: 'exams', component: ExamsComponent },
   // { path: 'route', component: ExamsComponent },
 ];
 

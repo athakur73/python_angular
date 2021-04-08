@@ -1,0 +1,16 @@
+h1 {
+    font-weight:bold;
+    color: blue;
+  }
+
+.container {
+    width:auto;
+	padding: 2em;
+    border: chartreuse;
+    font-size: small;
+}
+
+.container td, .container th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
